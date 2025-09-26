@@ -29,10 +29,16 @@
       ]
     },
 
+    /* -------------------- WINDOWS TEKNİKLERİ -------------------- */
+
     {
       "type": "attack-pattern",
       "id": "attack-pattern--t1059-001",
       "name": "Command and Scripting Interpreter: PowerShell",
+      "kill_chain_phases": [
+        { "kill_chain_name": "mitre-attack", "phase_name": "execution" }
+      ],
+      "x_mitre_is_subtechnique": true,
       "external_references": [
         { "source_name": "mitre-attack", "external_id": "T1059.001", "url": "https://attack.mitre.org/techniques/T1059/001/" }
       ]
@@ -41,6 +47,9 @@
       "type": "attack-pattern",
       "id": "attack-pattern--t1047",
       "name": "Windows Management Instrumentation",
+      "kill_chain_phases": [
+        { "kill_chain_name": "mitre-attack", "phase_name": "execution" }
+      ],
       "external_references": [
         { "source_name": "mitre-attack", "external_id": "T1047", "url": "https://attack.mitre.org/techniques/T1047/" }
       ]
@@ -49,6 +58,11 @@
       "type": "attack-pattern",
       "id": "attack-pattern--t1053-005",
       "name": "Scheduled Task/Job: Scheduled Task",
+      "kill_chain_phases": [
+        { "kill_chain_name": "mitre-attack", "phase_name": "persistence" },
+        { "kill_chain_name": "mitre-attack", "phase_name": "privilege-escalation" }
+      ],
+      "x_mitre_is_subtechnique": true,
       "external_references": [
         { "source_name": "mitre-attack", "external_id": "T1053.005", "url": "https://attack.mitre.org/techniques/T1053/005/" }
       ]
@@ -57,6 +71,10 @@
       "type": "attack-pattern",
       "id": "attack-pattern--t1569-002",
       "name": "System Services: Service Execution",
+      "kill_chain_phases": [
+        { "kill_chain_name": "mitre-attack", "phase_name": "execution" }
+      ],
+      "x_mitre_is_subtechnique": true,
       "external_references": [
         { "source_name": "mitre-attack", "external_id": "T1569.002", "url": "https://attack.mitre.org/techniques/T1569/002/" }
       ]
@@ -65,6 +83,11 @@
       "type": "attack-pattern",
       "id": "attack-pattern--t1547-001",
       "name": "Boot or Logon Autostart Execution: Registry Run Keys / Startup Folder",
+      "kill_chain_phases": [
+        { "kill_chain_name": "mitre-attack", "phase_name": "persistence" },
+        { "kill_chain_name": "mitre-attack", "phase_name": "privilege-escalation" }
+      ],
+      "x_mitre_is_subtechnique": true,
       "external_references": [
         { "source_name": "mitre-attack", "external_id": "T1547.001", "url": "https://attack.mitre.org/techniques/T1547/001/" }
       ]
@@ -73,6 +96,9 @@
       "type": "attack-pattern",
       "id": "attack-pattern--t1112",
       "name": "Modify Registry",
+      "kill_chain_phases": [
+        { "kill_chain_name": "mitre-attack", "phase_name": "defense-evasion" }
+      ],
       "external_references": [
         { "source_name": "mitre-attack", "external_id": "T1112", "url": "https://attack.mitre.org/techniques/T1112/" }
       ]
@@ -81,6 +107,10 @@
       "type": "attack-pattern",
       "id": "attack-pattern--t1218-005",
       "name": "Signed Binary Proxy Execution: Mshta",
+      "kill_chain_phases": [
+        { "kill_chain_name": "mitre-attack", "phase_name": "defense-evasion" }
+      ],
+      "x_mitre_is_subtechnique": true,
       "external_references": [
         { "source_name": "mitre-attack", "external_id": "T1218.005", "url": "https://attack.mitre.org/techniques/T1218/005/" }
       ]
@@ -89,6 +119,10 @@
       "type": "attack-pattern",
       "id": "attack-pattern--t1218-011",
       "name": "Signed Binary Proxy Execution: Rundll32",
+      "kill_chain_phases": [
+        { "kill_chain_name": "mitre-attack", "phase_name": "defense-evasion" }
+      ],
+      "x_mitre_is_subtechnique": true,
       "external_references": [
         { "source_name": "mitre-attack", "external_id": "T1218.011", "url": "https://attack.mitre.org/techniques/T1218/011/" }
       ]
@@ -97,6 +131,9 @@
       "type": "attack-pattern",
       "id": "attack-pattern--t1105",
       "name": "Ingress Tool Transfer",
+      "kill_chain_phases": [
+        { "kill_chain_name": "mitre-attack", "phase_name": "command-and-control" }
+      ],
       "external_references": [
         { "source_name": "mitre-attack", "external_id": "T1105", "url": "https://attack.mitre.org/techniques/T1105/" }
       ]
@@ -105,6 +142,9 @@
       "type": "attack-pattern",
       "id": "attack-pattern--t1082",
       "name": "System Information Discovery",
+      "kill_chain_phases": [
+        { "kill_chain_name": "mitre-attack", "phase_name": "discovery" }
+      ],
       "external_references": [
         { "source_name": "mitre-attack", "external_id": "T1082", "url": "https://attack.mitre.org/techniques/T1082/" }
       ]
@@ -113,6 +153,9 @@
       "type": "attack-pattern",
       "id": "attack-pattern--t1033",
       "name": "Account Discovery",
+      "kill_chain_phases": [
+        { "kill_chain_name": "mitre-attack", "phase_name": "discovery" }
+      ],
       "external_references": [
         { "source_name": "mitre-attack", "external_id": "T1033", "url": "https://attack.mitre.org/techniques/T1033/" }
       ]
@@ -121,6 +164,9 @@
       "type": "attack-pattern",
       "id": "attack-pattern--t1016",
       "name": "System Network Configuration Discovery",
+      "kill_chain_phases": [
+        { "kill_chain_name": "mitre-attack", "phase_name": "discovery" }
+      ],
       "external_references": [
         { "source_name": "mitre-attack", "external_id": "T1016", "url": "https://attack.mitre.org/techniques/T1016/" }
       ]
@@ -129,15 +175,24 @@
       "type": "attack-pattern",
       "id": "attack-pattern--t1036",
       "name": "Masquerading",
+      "kill_chain_phases": [
+        { "kill_chain_name": "mitre-attack", "phase_name": "defense-evasion" }
+      ],
       "external_references": [
         { "source_name": "mitre-attack", "external_id": "T1036", "url": "https://attack.mitre.org/techniques/T1036/" }
       ]
     },
 
+    /* -------------------- LINUX TEKNİKLERİ -------------------- */
+
     {
       "type": "attack-pattern",
       "id": "attack-pattern--t1059-004",
       "name": "Command and Scripting Interpreter: Bash",
+      "kill_chain_phases": [
+        { "kill_chain_name": "mitre-attack", "phase_name": "execution" }
+      ],
+      "x_mitre_is_subtechnique": true,
       "external_references": [
         { "source_name": "mitre-attack", "external_id": "T1059.004", "url": "https://attack.mitre.org/techniques/T1059/004/" }
       ]
@@ -146,6 +201,11 @@
       "type": "attack-pattern",
       "id": "attack-pattern--t1053-003",
       "name": "Scheduled Task/Job: Cron",
+      "kill_chain_phases": [
+        { "kill_chain_name": "mitre-attack", "phase_name": "persistence" },
+        { "kill_chain_name": "mitre-attack", "phase_name": "privilege-escalation" }
+      ],
+      "x_mitre_is_subtechnique": true,
       "external_references": [
         { "source_name": "mitre-attack", "external_id": "T1053.003", "url": "https://attack.mitre.org/techniques/T1053/003/" }
       ]
@@ -154,6 +214,10 @@
       "type": "attack-pattern",
       "id": "attack-pattern--t1069-001",
       "name": "Permission Groups Discovery: Local Groups",
+      "kill_chain_phases": [
+        { "kill_chain_name": "mitre-attack", "phase_name": "discovery" }
+      ],
+      "x_mitre_is_subtechnique": true,
       "external_references": [
         { "source_name": "mitre-attack", "external_id": "T1069.001", "url": "https://attack.mitre.org/techniques/T1069/001/" }
       ]
@@ -162,6 +226,9 @@
       "type": "attack-pattern",
       "id": "attack-pattern--t1057",
       "name": "Process Discovery",
+      "kill_chain_phases": [
+        { "kill_chain_name": "mitre-attack", "phase_name": "discovery" }
+      ],
       "external_references": [
         { "source_name": "mitre-attack", "external_id": "T1057", "url": "https://attack.mitre.org/techniques/T1057/" }
       ]
@@ -170,20 +237,25 @@
       "type": "attack-pattern",
       "id": "attack-pattern--t1083",
       "name": "File and Directory Discovery",
+      "kill_chain_phases": [
+        { "kill_chain_name": "mitre-attack", "phase_name": "discovery" }
+      ],
       "external_references": [
         { "source_name": "mitre-attack", "external_id": "T1083", "url": "https://attack.mitre.org/techniques/T1083/" }
       ]
     },
 
-    { "type": "relationship", "id": "relationship--win-1", "relationship_type": "uses", "source_ref": "campaign--windows-run-0001", "target_ref": "attack-pattern--t1059-001" },
-    { "type": "relationship", "id": "relationship--win-2", "relationship_type": "uses", "source_ref": "campaign--windows-run-0001", "target_ref": "attack-pattern--t1047" },
-    { "type": "relationship", "id": "relationship--win-3", "relationship_type": "uses", "source_ref": "campaign--windows-run-0001", "target_ref": "attack-pattern--t1053-005" },
-    { "type": "relationship", "id": "relationship--win-4", "relationship_type": "uses", "source_ref": "campaign--windows-run-0001", "target_ref": "attack-pattern--t1569-002" },
-    { "type": "relationship", "id": "relationship--win-5", "relationship_type": "uses", "source_ref": "campaign--windows-run-0001", "target_ref": "attack-pattern--t1547-001" },
-    { "type": "relationship", "id": "relationship--win-6", "relationship_type": "uses", "source_ref": "campaign--windows-run-0001", "target_ref": "attack-pattern--t1112" },
-    { "type": "relationship", "id": "relationship--win-7", "relationship_type": "uses", "source_ref": "campaign--windows-run-0001", "target_ref": "attack-pattern--t1218-005" },
-    { "type": "relationship", "id": "relationship--win-8", "relationship_type": "uses", "source_ref": "campaign--windows-run-0001", "target_ref": "attack-pattern--t1218-011" },
-    { "type": "relationship", "id": "relationship--win-9", "relationship_type": "uses", "source_ref": "campaign--windows-run-0001", "target_ref": "attack-pattern--t1105" },
+    /* -------------------- RELATIONSHIPS -------------------- */
+
+    { "type": "relationship", "id": "relationship--win-1",  "relationship_type": "uses", "source_ref": "campaign--windows-run-0001", "target_ref": "attack-pattern--t1059-001" },
+    { "type": "relationship", "id": "relationship--win-2",  "relationship_type": "uses", "source_ref": "campaign--windows-run-0001", "target_ref": "attack-pattern--t1047" },
+    { "type": "relationship", "id": "relationship--win-3",  "relationship_type": "uses", "source_ref": "campaign--windows-run-0001", "target_ref": "attack-pattern--t1053-005" },
+    { "type": "relationship", "id": "relationship--win-4",  "relationship_type": "uses", "source_ref": "campaign--windows-run-0001", "target_ref": "attack-pattern--t1569-002" },
+    { "type": "relationship", "id": "relationship--win-5",  "relationship_type": "uses", "source_ref": "campaign--windows-run-0001", "target_ref": "attack-pattern--t1547-001" },
+    { "type": "relationship", "id": "relationship--win-6",  "relationship_type": "uses", "source_ref": "campaign--windows-run-0001", "target_ref": "attack-pattern--t1112" },
+    { "type": "relationship", "id": "relationship--win-7",  "relationship_type": "uses", "source_ref": "campaign--windows-run-0001", "target_ref": "attack-pattern--t1218-005" },
+    { "type": "relationship", "id": "relationship--win-8",  "relationship_type": "uses", "source_ref": "campaign--windows-run-0001", "target_ref": "attack-pattern--t1218-011" },
+    { "type": "relationship", "id": "relationship--win-9",  "relationship_type": "uses", "source_ref": "campaign--windows-run-0001", "target_ref": "attack-pattern--t1105" },
     { "type": "relationship", "id": "relationship--win-10", "relationship_type": "uses", "source_ref": "campaign--windows-run-0001", "target_ref": "attack-pattern--t1082" },
     { "type": "relationship", "id": "relationship--win-11", "relationship_type": "uses", "source_ref": "campaign--windows-run-0001", "target_ref": "attack-pattern--t1033" },
     { "type": "relationship", "id": "relationship--win-12", "relationship_type": "uses", "source_ref": "campaign--windows-run-0001", "target_ref": "attack-pattern--t1016" },
@@ -198,6 +270,7 @@
     { "type": "relationship", "id": "relationship--lin-7", "relationship_type": "uses", "source_ref": "campaign--linux-run-0001", "target_ref": "attack-pattern--t1057" },
     { "type": "relationship", "id": "relationship--lin-8", "relationship_type": "uses", "source_ref": "campaign--linux-run-0001", "target_ref": "attack-pattern--t1083" },
 
-    { "type": "relationship", "id": "relationship--rep-owns", "relationship_type": "attributed-to", "source_ref": "report--atomic-lab-0001", "target_ref": "intrusion-set--atomic-sim-0001" }
+    { "type": "relationship", "id": "relationship--win-attrib", "relationship_type": "attributed-to", "source_ref": "campaign--windows-run-0001", "target_ref": "intrusion-set--atomic-sim-0001" },
+    { "type": "relationship", "id": "relationship--lin-attrib", "relationship_type": "attributed-to", "source_ref": "campaign--linux-run-0001", "target_ref": "intrusion-set--atomic-sim-0001" }
   ]
 }
