@@ -29,7 +29,6 @@
       ]
     },
 
-    /* ---------------- ATT&CK Techniques (Windows Host) ---------------- */
     {
       "type": "attack-pattern",
       "id": "attack-pattern--t1059-001",
@@ -135,7 +134,6 @@
       ]
     },
 
-    /* ---------------- ATT&CK Techniques (Linux Host) ---------------- */
     {
       "type": "attack-pattern",
       "id": "attack-pattern--t1059-004",
@@ -177,8 +175,6 @@
       ]
     },
 
-    /* --------------- Relationships: campaigns use techniques --------------- */
-    /* Windows campaign uses … */
     { "type": "relationship", "id": "relationship--win-1", "relationship_type": "uses", "source_ref": "campaign--windows-run-0001", "target_ref": "attack-pattern--t1059-001" },
     { "type": "relationship", "id": "relationship--win-2", "relationship_type": "uses", "source_ref": "campaign--windows-run-0001", "target_ref": "attack-pattern--t1047" },
     { "type": "relationship", "id": "relationship--win-3", "relationship_type": "uses", "source_ref": "campaign--windows-run-0001", "target_ref": "attack-pattern--t1053-005" },
@@ -193,7 +189,6 @@
     { "type": "relationship", "id": "relationship--win-12", "relationship_type": "uses", "source_ref": "campaign--windows-run-0001", "target_ref": "attack-pattern--t1016" },
     { "type": "relationship", "id": "relationship--win-13", "relationship_type": "uses", "source_ref": "campaign--windows-run-0001", "target_ref": "attack-pattern--t1036" },
 
-    /* Linux campaign uses … */
     { "type": "relationship", "id": "relationship--lin-1", "relationship_type": "uses", "source_ref": "campaign--linux-run-0001", "target_ref": "attack-pattern--t1059-004" },
     { "type": "relationship", "id": "relationship--lin-2", "relationship_type": "uses", "source_ref": "campaign--linux-run-0001", "target_ref": "attack-pattern--t1053-003" },
     { "type": "relationship", "id": "relationship--lin-3", "relationship_type": "uses", "source_ref": "campaign--linux-run-0001", "target_ref": "attack-pattern--t1105" },
@@ -203,7 +198,6 @@
     { "type": "relationship", "id": "relationship--lin-7", "relationship_type": "uses", "source_ref": "campaign--linux-run-0001", "target_ref": "attack-pattern--t1057" },
     { "type": "relationship", "id": "relationship--lin-8", "relationship_type": "uses", "source_ref": "campaign--linux-run-0001", "target_ref": "attack-pattern--t1083" },
 
-    /* Report → Intrusion set */
     { "type": "relationship", "id": "relationship--rep-owns", "relationship_type": "attributed-to", "source_ref": "report--atomic-lab-0001", "target_ref": "intrusion-set--atomic-sim-0001" }
   ]
 }
