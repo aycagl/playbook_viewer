@@ -8,68 +8,78 @@
     <link rel="stylesheet" href="css/bootstrap-tour-standalone.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/flags.css">
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
-    <script defer src='./js/all.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script defer src="./js/all.js"></script>
     <script src="./js/bootstrap-tour-standalone.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
     <script src="./js/datamaps.world.hires.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ag-grid/23.0.2/ag-grid-community.min.js"></script>
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/ag-grid/23.0.2/styles/ag-theme-balham-dark.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ag-grid/23.0.2/styles/ag-theme-balham-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
 
     <script src="./js/index.js"></script>
-    <script>$(document)
-        .ready(() => {
-            loadConsts();
-        });
+    <script>
+      $(document).ready(() => { loadConsts(); });
     </script>
 </head>
-<script>
-(async function () {
-  async function loadJSON(url){ const r = await fetch(url); if(!r.ok) throw new Error(url+" yüklenemedi"); return r.json(); }
-  function draw(data){
-    if (window.renderPlaybook) { window.renderPlaybook(data); }
-    else if (window.renderPB) { window.renderPB(data); }
-    else { alert("renderPlaybook fonksiyonu bulunamadı. js/all.js veya js/index.js içinde global yapmanız gerekebilir."); }
-  }
-
-  const runs = [
-    { title: 'Host3 — Atomic Run', url: 'runs/host3_playbook_viewer.json' },
-    { title: 'Host4 — Atomic Run', url: 'runs/host4_playbook_viewer.json' }
-  ];
-
-  const $list = $('.playbooks'); 
-  runs.forEach(r => {
-    const $btn = $('<div/>', { class: 'action playbook', text: r.title })
-      .on('click', async () => {
-        try { const data = await loadJSON(r.url); draw(data); }
-        catch(e){ console.error(e); alert(e.message); }
-      });
-    $list.append($btn);
-  });
-})();
-</script>
 
 <body>
-<div class="modalcontainer"></div>
-<div class="wrapper">
+  <div class="modalcontainer"></div>
+  <div class="wrapper">
     <div class="box sidebar">
-        <a href="https://unit42.paloaltonetworks.com/" target="_blank"> <img src='imgs/u42logo.png' alt=''></a>
-        <div class="action walkthrough"><span>PLAYBOOK WALKTHROUGH</span></div>
-        <div class="action view-home"><span>VIEW HOME</span></div>
-        <div class="action view-datamap"><span>VIEW MAP</span></div>
-        <div class="action filter"><span>FILTER PLAYBOOKS</span></div>
-        <div class="action sidebar-clear-filters"><span>CLEAR FILTERS</span></div>
-        <div class="playbooks"></div>
-        <div class="box footer">
-            Created by Palo Alto Networks - Unit 42
-            <br><a style="color:#95989a" href="https://attack.mitre.org/wiki/Main_Page">Mitre ATT&amp;CK™</a>
-            | <a style="color:#95989a" href="https://oasis-open.github.io/cti-documentation/stix/intro">STIX 2.0</a>
-        </div>
+      <a href="https://unit42.paloaltonetworks.com/" target="_blank">
+        <img src="imgs/u42logo.png" alt="">
+      </a>
+      <div class="action walkthrough"><span>PLAYBOOK WALKTHROUGH</span></div>
+      <div class="action view-home"><span>VIEW HOME</span></div>
+      <div class="action view-datamap"><span>VIEW MAP</span></div>
+      <div class="action filter"><span>FILTER PLAYBOOKS</span></div>
+      <div class="action sidebar-clear-filters"><span>CLEAR FILTERS</span></div>
+
+      <!-- Sol menü listesi (butonları buraya ekleyeceğiz) -->
+      <div class="playbooks"></div>
+
+      <div class="box footer">
+        Created by Palo Alto Networks - Unit 42
+        <br><a style="color:#95989a" href="https://attack.mitre.org/wiki/Main_Page">Mitre ATT&amp;CK™</a>
+        | <a style="color:#95989a" href="https://oasis-open.github.io/cti-documentation/stix/intro">STIX 2.0</a>
+      </div>
     </div>
+
     <div class="box contents"></div>
-</div>
+  </div>
+
+  <!-- RUN JSON’larını yükleyen ek script: EN SONA kondu -->
+  <script>
+  (async function () {
+    async function loadJSON(url) {
+      const r = await fetch(url, {cache: 'no-cache'});
+      if (!r.ok) throw new Error(url + " yüklenemedi (" + r.status + ")");
+      return r.json();
+    }
+    function draw(data) {
+      if (window.renderPlaybook) { window.renderPlaybook(data); }
+      else if (window.renderPB) { window.renderPB(data); }
+      else { alert("renderPlaybook fonksiyonu bulunamadı. (js/index.js içinde global yapın)"); }
+    }
+
+    const runs = [
+      { title: "Host3 — Atomic Run", url: "runs/host3_playbook_viewer.json" },
+      { title: "Host4 — Atomic Run", url: "runs/host4_playbook_viewer.json" }
+      // { title: "Host3 + Host4 (Combined)", url: "runs/atomic_run_log.json" }
+    ];
+
+    const $list = $(".playbooks");
+    runs.forEach(r => {
+      const $btn = $("<div/>", { class: "action playbook", text: r.title })
+        .on("click", async () => {
+          try { const data = await loadJSON(r.url); draw(data); }
+          catch (e) { console.error(e); alert(e.message); }
+        });
+      $list.append($btn);
+    });
+  })();
+  </script>
 </body>
 </html>
