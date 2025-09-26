@@ -26,6 +26,31 @@
         });
     </script>
 </head>
+<script>
+(async function () {
+  async function loadJSON(url){ const r = await fetch(url); if(!r.ok) throw new Error(url+" yüklenemedi"); return r.json(); }
+  function draw(data){
+    if (window.renderPlaybook) { window.renderPlaybook(data); }
+    else if (window.renderPB) { window.renderPB(data); }
+    else { alert("renderPlaybook fonksiyonu bulunamadı. js/all.js veya js/index.js içinde global yapmanız gerekebilir."); }
+  }
+
+  const runs = [
+    { title: 'Host3 — Atomic Run', url: 'runs/host3_playbook_viewer.json' },
+    { title: 'Host4 — Atomic Run', url: 'runs/host4_playbook_viewer.json' }
+  ];
+
+  const $list = $('.playbooks'); 
+  runs.forEach(r => {
+    const $btn = $('<div/>', { class: 'action playbook', text: r.title })
+      .on('click', async () => {
+        try { const data = await loadJSON(r.url); draw(data); }
+        catch(e){ console.error(e); alert(e.message); }
+      });
+    $list.append($btn);
+  });
+})();
+</script>
 
 <body>
 <div class="modalcontainer"></div>
