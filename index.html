@@ -22,6 +22,17 @@
     <script>
       $(document).ready(() => { loadConsts(); });
     </script>
+    <style>
+      /* küçük kozmetik */
+      .pv-header { display:flex; align-items:center; justify-content:space-between; margin:10px 0 8px; }
+      .pv-badges span{ display:inline-block; padding:4px 8px; border-radius:6px; margin-left:6px; font-size:12px; }
+      .pv-ok { background:#1f7a1f; color:#fff; }
+      .pv-err{ background:#a11; color:#fff; }
+      .pv-grid { height: 480px; width: 100%; }
+      .pv-pre { white-space:pre-wrap; font-family:Inconsolata,monospace; font-size:12px; background:#1e1f26; border:1px solid #333; padding:8px; border-radius:6px; }
+      .pv-section { margin-top:10px; }
+      .pv-run-btn { cursor:pointer; }
+    </style>
 </head>
 
 <body>
@@ -37,7 +48,7 @@
       <div class="action filter"><span>FILTER PLAYBOOKS</span></div>
       <div class="action sidebar-clear-filters"><span>CLEAR FILTERS</span></div>
 
-      <!-- Sol menü listesi (butonları buraya ekleyeceğiz) -->
+      <!-- Sol menü: butonları buraya basacağız -->
       <div class="playbooks"></div>
 
       <div class="box footer">
@@ -47,38 +58,135 @@
       </div>
     </div>
 
-    <div class="box contents"></div>
+    <!-- Orta panel -->
+    <div class="box contents">
+      <!-- içerik JS ile basılacak -->
+    </div>
   </div>
 
-  <!-- RUN JSON’larını yükleyen ek script: EN SONA kondu -->
+  <!-- EN SONA: JSON yükle ve çiz -->
   <script>
-  (async function () {
+  (function () {
+    // --- yardımcılar ---
     async function loadJSON(url) {
-      const r = await fetch(url, {cache: 'no-cache'});
+      const r = await fetch(url, { cache: 'no-cache' });
       if (!r.ok) throw new Error(url + " yüklenemedi (" + r.status + ")");
       return r.json();
     }
-    function draw(data) {
-      if (window.renderPlaybook) { window.renderPlaybook(data); }
-      else if (window.renderPB) { window.renderPB(data); }
-      else { alert("renderPlaybook fonksiyonu bulunamadı. (js/index.js içinde global yapın)"); }
+    function tryNativeRenderer(data) {
+      if (window.renderPlaybook)      { window.renderPlaybook(data); return true; }
+      if (window.renderPB)            { window.renderPB(data);       return true; }
+      return false;
     }
 
+    // Bizim renderer (runs/*_playbook_viewer.json şemasına göre)
+    function renderAtomicRun(data) {
+      const root = document.querySelector('.contents');
+      root.innerHTML = "";
+
+      const ok = (data.steps || []).filter(s => s.status && s.status.toLowerCase() === 'ok').length;
+      const err= (data.steps || []).filter(s => s.status && s.status.toLowerCase() === 'error').length;
+
+      const header = document.createElement('div');
+      header.className = 'pv-header';
+      header.innerHTML = `
+        <h2 style="margin:0">${data.name || 'Atomic Run'}</h2>
+        <div class="pv-badges">
+          <span class="pv-ok">OK: ${ok}</span>
+          <span class="pv-err">ERROR: ${err}</span>
+        </div>`;
+      root.appendChild(header);
+
+      // üstte küçük özet
+      const summary = document.createElement('div');
+      summary.className = 'pv-section';
+      summary.innerHTML = `
+        <div><b>Toplam Adım:</b> ${(data.steps||[]).length}</div>
+      `;
+      root.appendChild(summary);
+
+      // Grid konteyneri
+      const gridWrap = document.createElement('div');
+      gridWrap.className = 'pv-section';
+      const gridDiv = document.createElement('div');
+      gridDiv.className = 'ag-theme-balham-dark pv-grid';
+      gridWrap.appendChild(gridDiv);
+      root.appendChild(gridWrap);
+
+      // detay alanı
+      const detail = document.createElement('div');
+      detail.className = 'pv-section';
+      detail.innerHTML = `
+        <h3>Step Output</h3>
+        <div id="pv-detail" class="pv-pre">Bir satır seçin…</div>`;
+      root.appendChild(detail);
+
+      // ag-Grid kolonları
+      const columnDefs = [
+        { headerName: "Host", field: "host", width: 110 },
+        { headerName: "OS", field: "os", width: 100 },
+        { headerName: "TID", field: "tid", width: 120 },
+        { headerName: "Tests", field: "tests", width: 90 },
+        { headerName: "Status", field: "status", width: 110,
+          cellClass: params => (params.value||'').toLowerCase()==='ok' ? 'pv-ok' : 'pv-err' },
+        { headerName: "Start", field: "start", minWidth: 170 },
+        { headerName: "End", field: "end", minWidth: 170 },
+        { headerName: "Notes", field: "notes", flex: 1 }
+      ];
+
+      // veri
+      const rowData = (data.steps || []).map(s => ({
+        host: s.host, os: s.os, tid: s.tid, tests: s.tests, status: s.status,
+        start: s.start, end: s.end, notes: s.notes
+      }));
+
+      // grid
+      const gridOptions = {
+        columnDefs, rowData,
+        rowSelection: 'single',
+        onRowClicked: e => {
+          const step = (data.steps || [])[e.rowIndex];
+          const text = [
+            step.prereq ? ("[Prereq]\n" + step.prereq.trim()) : "",
+            step.output ? ("[Run]\n"    + step.output.trim())  : "",
+            step.cleanup? ("[Cleanup]\n"+ step.cleanup.trim()) : "",
+          ].filter(Boolean).join("\n\n");
+          document.getElementById('pv-detail').textContent = text || "Çıktı yok.";
+        },
+        defaultColDef: { resizable: true, sortable: true, filter: true }
+      };
+      new agGrid.Grid(gridDiv, gridOptions);
+    }
+
+    // Sol menüye butonlar
     const runs = [
       { title: "Host3 — Atomic Run", url: "runs/host3_playbook_viewer.json" },
       { title: "Host4 — Atomic Run", url: "runs/host4_playbook_viewer.json" }
       // { title: "Host3 + Host4 (Combined)", url: "runs/atomic_run_log.json" }
     ];
-
     const $list = $(".playbooks");
     runs.forEach(r => {
-      const $btn = $("<div/>", { class: "action playbook", text: r.title })
+      const $btn = $("<div/>", { class: "action playbook pv-run-btn", text: r.title })
         .on("click", async () => {
-          try { const data = await loadJSON(r.url); draw(data); }
-          catch (e) { console.error(e); alert(e.message); }
+          try {
+            const data = await loadJSON(r.url);
+            // Orijinal renderer varsa onu dene; yoksa bizimkini kullan
+            if (!tryNativeRenderer(data)) renderAtomicRun(data);
+          } catch (e) {
+            console.error(e);
+            alert(e.message);
+          }
         });
       $list.append($btn);
     });
+
+    // İsteğe bağlı: URL param ile otomatik yükleme (?run=host3|host4)
+    const params = new URLSearchParams(location.search);
+    const auto = params.get('run');
+    if (auto) {
+      const found = runs.find(x => x.title.toLowerCase().includes(auto.toLowerCase()));
+      if (found) $list.find('.pv-run-btn').filter((_,el)=>el.textContent===found.title).click();
+    }
   })();
   </script>
 </body>
