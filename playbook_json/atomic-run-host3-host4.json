@@ -1,6 +1,7 @@
 {
   "type": "bundle",
-  "id": "bundle--atomic-lab-0002",
+  "id": "bundle--c1b2f1b0-aaaa-4444-bbbb-000000000002",
+  "spec_version": "2.0",
   "objects": [
     {
       "type": "intrusion-set",
@@ -13,61 +14,109 @@
     { "type": "campaign", "id": "campaign--linux-host3-0001", "name": "Linux Run — Host 3", "created": "2025-09-26T00:00:00Z", "modified": "2025-09-26T00:00:00Z" },
     { "type": "campaign", "id": "campaign--windows-host4-0001", "name": "Windows Run — Host 4", "created": "2025-09-26T00:00:00Z", "modified": "2025-09-26T00:00:00Z" },
 
-    /* ==== ATT&CK teknik objeleri (unique TID’ler) ==== */
-    { "type": "attack-pattern", "id": "attack-pattern--t1059-004", "name": "Command and Scripting Interpreter: Bash", "external_references": [ { "source_name": "mitre-attack", "external_id": "T1059.004" } ] },
-    { "type": "attack-pattern", "id": "attack-pattern--t1053-003", "name": "Scheduled Task/Job: Cron", "external_references": [ { "source_name": "mitre-attack", "external_id": "T1053.003" } ] },
-    { "type": "attack-pattern", "id": "attack-pattern--t1105",     "name": "Ingress Tool Transfer", "external_references": [ { "source_name": "mitre-attack", "external_id": "T1105" } ] },
-    { "type": "attack-pattern", "id": "attack-pattern--t1082",     "name": "System Information Discovery", "external_references": [ { "source_name": "mitre-attack", "external_id": "T1082" } ] },
-    { "type": "attack-pattern", "id": "attack-pattern--t1016",     "name": "System Network Configuration Discovery", "external_references": [ { "source_name": "mitre-attack", "external_id": "T1016" } ] },
-    { "type": "attack-pattern", "id": "attack-pattern--t1069-001", "name": "Permission Groups Discovery: Local Groups", "external_references": [ { "source_name": "mitre-attack", "external_id": "T1069.001" } ] },
-    { "type": "attack-pattern", "id": "attack-pattern--t1057",     "name": "Process Discovery", "external_references": [ { "source_name": "mitre-attack", "external_id": "T1057" } ] },
-    { "type": "attack-pattern", "id": "attack-pattern--t1083",     "name": "File and Directory Discovery", "external_references": [ { "source_name": "mitre-attack", "external_id": "T1083" } ] },
+    { "type": "attack-pattern", "id": "attack-pattern--t1059-004", "name": "T1059.004: Bash", "created": "2025-09-26T00:00:00Z", "modified": "2025-09-26T00:00:00Z",
+      "kill_chain_phases": [{ "kill_chain_name": "mitre-attack", "phase_name": "execution" }],
+      "external_references": [{ "source_name": "mitre-attack", "external_id": "T1059.004" }] },
 
-    /* Windows tarafında denenenler (hepsi error olsa da timeline’ı görmek için ekliyoruz) */
-    { "type": "attack-pattern", "id": "attack-pattern--t1059-001", "name": "Command and Scripting Interpreter: PowerShell", "external_references": [ { "source_name": "mitre-attack", "external_id": "T1059.001" } ] },
-    { "type": "attack-pattern", "id": "attack-pattern--t1047",     "name": "Windows Management Instrumentation", "external_references": [ { "source_name": "mitre-attack", "external_id": "T1047" } ] },
-    { "type": "attack-pattern", "id": "attack-pattern--t1053-005", "name": "Scheduled Task/Job: Scheduled Task", "external_references": [ { "source_name": "mitre-attack", "external_id": "T1053.005" } ] },
-    { "type": "attack-pattern", "id": "attack-pattern--t1569-002", "name": "System Services: Service Execution", "external_references": [ { "source_name": "mitre-attack", "external_id": "T1569.002" } ] },
-    { "type": "attack-pattern", "id": "attack-pattern--t1547-001", "name": "Boot or Logon Autostart Execution: Registry Run Keys/Startup Folder", "external_references": [ { "source_name": "mitre-attack", "external_id": "T1547.001" } ] },
-    { "type": "attack-pattern", "id": "attack-pattern--t1112",     "name": "Modify Registry", "external_references": [ { "source_name": "mitre-attack", "external_id": "T1112" } ] },
-    { "type": "attack-pattern", "id": "attack-pattern--t1218-005", "name": "Signed Binary Proxy Execution: Mshta", "external_references": [ { "source_name": "mitre-attack", "external_id": "T1218.005" } ] },
-    { "type": "attack-pattern", "id": "attack-pattern--t1218-011", "name": "Signed Binary Proxy Execution: Rundll32", "external_references": [ { "source_name": "mitre-attack", "external_id": "T1218.011" } ] },
-    { "type": "attack-pattern", "id": "attack-pattern--t1033",     "name": "Account Discovery", "external_references": [ { "source_name": "mitre-attack", "external_id": "T1033" } ] },
-    { "type": "attack-pattern", "id": "attack-pattern--t1036",     "name": "Masquerading", "external_references": [ { "source_name": "mitre-attack", "external_id": "T1036" } ] },
+    { "type": "attack-pattern", "id": "attack-pattern--t1053-003", "name": "T1053.003: Cron", "created": "2025-09-26T00:00:00Z", "modified": "2025-09-26T00:00:00Z",
+      "kill_chain_phases": [{ "kill_chain_name": "mitre-attack", "phase_name": "persistence" }],
+      "external_references": [{ "source_name": "mitre-attack", "external_id": "T1053.003" }] },
 
-    /* ==== İlişkiler: campaign -> technique (Linux Host3) ==== */
-    { "type": "relationship", "id": "relationship--h3--t1059-004-1", "relationship_type": "uses", "source_ref": "campaign--linux-host3-0001", "target_ref": "attack-pattern--t1059-004", "start_time": "2025-09-26T12:42:19.763Z", "stop_time": "2025-09-26T12:42:23.232Z", "description": "T1059.004-1 ok. Output: Hello from the Atomic Red Team; ping 8.8.8.8 ..."} ,
-    { "type": "relationship", "id": "relationship--h3--t1059-004-6", "relationship_type": "uses", "source_ref": "campaign--linux-host3-0001", "target_ref": "attack-pattern--t1059-004", "start_time": "2025-09-26T12:42:23.232Z", "stop_time": "2025-09-26T12:42:23.541Z", "description": "T1059.004-6 ok. Output: SHELL=/bin/bash"} ,
-    { "type": "relationship", "id": "relationship--h3--t1053-003-1", "relationship_type": "uses", "source_ref": "campaign--linux-host3-0001", "target_ref": "attack-pattern--t1053-003", "start_time": "2025-09-26T12:42:23.541Z", "stop_time": "2025-09-26T12:42:24.252Z", "description": "T1053.003-1 ok. Cron replace; cleanup executed."} ,
-    { "type": "relationship", "id": "relationship--h3--t1105-1",     "relationship_type": "uses", "source_ref": "campaign--linux-host3-0001", "target_ref": "attack-pattern--t1105",     "start_time": "2025-09-26T12:42:24.252Z", "stop_time": "2025-09-26T12:42:24.939Z", "description": "T1105-1 error. rsync push failed (host not resolved)."} ,
-    { "type": "relationship", "id": "relationship--h3--t1082-3",     "relationship_type": "uses", "source_ref": "campaign--linux-host3-0001", "target_ref": "attack-pattern--t1082",     "start_time": "2025-09-26T12:42:24.939Z", "stop_time": "2025-09-26T12:42:25.372Z", "description": "T1082-3 ok. OS info enumerated (Ubuntu 22.04.5 LTS)."} ,
-    { "type": "relationship", "id": "relationship--h3--t1016-3",     "relationship_type": "uses", "source_ref": "campaign--linux-host3-0001", "target_ref": "attack-pattern--t1016",     "start_time": "2025-09-26T12:42:25.372Z", "stop_time": "2025-09-26T12:42:25.662Z", "description": "T1016-3 ok. ifconfig/arp yok, ip addr ile çıktı; enp1s0=172.16.20.50/24."} ,
-    { "type": "relationship", "id": "relationship--h3--t1069-001-1", "relationship_type": "uses", "source_ref": "campaign--linux-host3-0001", "target_ref": "attack-pattern--t1069-001", "start_time": "2025-09-26T12:42:25.662Z", "stop_time": "2025-09-26T12:42:25.976Z", "description": "T1069.001-1 ok. root/gruplar listelendi."} ,
-    { "type": "relationship", "id": "relationship--h3--t1057-1",     "relationship_type": "uses", "source_ref": "campaign--linux-host3-0001", "target_ref": "attack-pattern--t1057",     "start_time": "2025-09-26T12:42:25.976Z", "stop_time": "2025-09-26T12:42:26.291Z", "description": "T1057-1 ok. ps ile süreç keşfi."} ,
-    { "type": "relationship", "id": "relationship--h3--t1083-3",     "relationship_type": "uses", "source_ref": "campaign--linux-host3-0001", "target_ref": "attack-pattern--t1083",     "start_time": "2025-09-26T12:42:26.291Z", "stop_time": "2025-09-26T12:42:26.743Z", "description": "T1083-3 ok. Dosya/dizin keşfi (art.sh, loot.txt, ...)."} ,
+    { "type": "attack-pattern", "id": "attack-pattern--t1105", "name": "T1105: Ingress Tool Transfer", "created": "2025-09-26T00:00:00Z", "modified": "2025-09-26T00:00:00Z",
+      "kill_chain_phases": [{ "kill_chain_name": "mitre-attack", "phase_name": "command-and-control" }],
+      "external_references": [{ "source_name": "mitre-attack", "external_id": "T1105" }] },
 
-    /* ==== İlişkiler: campaign -> technique (Windows Host4; hepsi error) ==== */
-    { "type": "relationship", "id": "relationship--h4--t1059-001-1", "relationship_type": "uses", "source_ref": "campaign--windows-host4-0001", "target_ref": "attack-pattern--t1059-001", "start_time": "2025-09-26T12:57:19Z", "stop_time": "2025-09-26T12:57:22Z", "description": "T1059.001-1 error: Cannot bind argument to parameter 'Path' because it is an empty string." },
-    { "type": "relationship", "id": "relationship--h4--t1059-001-2", "relationship_type": "uses", "source_ref": "campaign--windows-host4-0001", "target_ref": "attack-pattern--t1059-001", "start_time": "2025-09-26T12:57:22Z", "stop_time": "2025-09-26T12:57:22Z", "description": "T1059.001-2 error: Path empty." },
-    { "type": "relationship", "id": "relationship--h4--t1047-1",     "relationship_type": "uses", "source_ref": "campaign--windows-host4-0001", "target_ref": "attack-pattern--t1047",     "start_time": "2025-09-26T12:57:22Z", "stop_time": "2025-09-26T12:57:22Z", "description": "T1047-1 error: Path empty." },
-    { "type": "relationship", "id": "relationship--h4--t1053-005-1", "relationship_type": "uses", "source_ref": "campaign--windows-host4-0001", "target_ref": "attack-pattern--t1053-005", "start_time": "2025-09-26T12:57:22Z", "stop_time": "2025-09-26T12:57:22Z", "description": "T1053.005-1 error: Path empty." },
-    { "type": "relationship", "id": "relationship--h4--t1569-002-1", "relationship_type": "uses", "source_ref": "campaign--windows-host4-0001", "target_ref": "attack-pattern--t1569-002", "start_time": "2025-09-26T12:57:22Z", "stop_time": "2025-09-26T12:57:22Z", "description": "T1569.002-1 error: Path empty." },
-    { "type": "relationship", "id": "relationship--h4--t1547-001-1", "relationship_type": "uses", "source_ref": "campaign--windows-host4-0001", "target_ref": "attack-pattern--t1547-001", "start_time": "2025-09-26T12:57:22Z", "stop_time": "2025-09-26T12:57:22Z", "description": "T1547.001-1 error: Path empty." },
-    { "type": "relationship", "id": "relationship--h4--t1112-1",     "relationship_type": "uses", "source_ref": "campaign--windows-host4-0001", "target_ref": "attack-pattern--t1112",     "start_time": "2025-09-26T12:57:22Z", "stop_time": "2025-09-26T12:57:22Z", "description": "T1112-1 error: Path empty." },
-    { "type": "relationship", "id": "relationship--h4--t1218-005-1", "relationship_type": "uses", "source_ref": "campaign--windows-host4-0001", "target_ref": "attack-pattern--t1218-005", "start_time": "2025-09-26T12:57:22Z", "stop_time": "2025-09-26T12:57:22Z", "description": "T1218.005-1 error: Path empty." },
-    { "type": "relationship", "id": "relationship--h4--t1218-011-1", "relationship_type": "uses", "source_ref": "campaign--windows-host4-0001", "target_ref": "attack-pattern--t1218-011", "start_time": "2025-09-26T12:57:22Z", "stop_time": "2025-09-26T12:57:22Z", "description": "T1218.011-1 error: Path empty." },
-    { "type": "relationship", "id": "relationship--h4--t1105-1",     "relationship_type": "uses", "source_ref": "campaign--windows-host4-0001", "target_ref": "attack-pattern--t1105",     "start_time": "2025-09-26T12:57:22Z", "stop_time": "2025-09-26T12:57:22Z", "description": "T1105-1 error: Path empty." },
-    { "type": "relationship", "id": "relationship--h4--t1082-1",     "relationship_type": "uses", "source_ref": "campaign--windows-host4-0001", "target_ref": "attack-pattern--t1082",     "start_time": "2025-09-26T12:57:22Z", "stop_time": "2025-09-26T12:57:22Z", "description": "T1082-1 error: Path empty." },
-    { "type": "relationship", "id": "relationship--h4--t1033-1",     "relationship_type": "uses", "source_ref": "campaign--windows-host4-0001", "target_ref": "attack-pattern--t1033",     "start_time": "2025-09-26T12:57:22Z", "stop_time": "2025-09-26T12:57:23Z", "description": "T1033-1 error: Path empty." },
-    { "type": "relationship", "id": "relationship--h4--t1016-1",     "relationship_type": "uses", "source_ref": "campaign--windows-host4-0001", "target_ref": "attack-pattern--t1016",     "start_time": "2025-09-26T12:57:23Z", "stop_time": "2025-09-26T12:57:23Z", "description": "T1016-1 error: Path empty." },
-    { "type": "relationship", "id": "relationship--h4--t1036-1",     "relationship_type": "uses", "source_ref": "campaign--windows-host4-0001", "target_ref": "attack-pattern--t1036",     "start_time": "2025-09-26T12:57:23Z", "stop_time": "2025-09-26T12:57:23Z", "description": "T1036-1 error: Path empty." },
+    { "type": "attack-pattern", "id": "attack-pattern--t1082", "name": "T1082: System Information Discovery", "created": "2025-09-26T00:00:00Z", "modified": "2025-09-26T00:00:00Z",
+      "kill_chain_phases": [{ "kill_chain_name": "mitre-attack", "phase_name": "discovery" }],
+      "external_references": [{ "source_name": "mitre-attack", "external_id": "T1082" }] },
 
-    /* ==== Üst rapor (viewer ana giriş) ==== */
+    { "type": "attack-pattern", "id": "attack-pattern--t1016", "name": "T1016: System Network Configuration Discovery", "created": "2025-09-26T00:00:00Z", "modified": "2025-09-26T00:00:00Z",
+      "kill_chain_phases": [{ "kill_chain_name": "mitre-attack", "phase_name": "discovery" }],
+      "external_references": [{ "source_name": "mitre-attack", "external_id": "T1016" }] },
+
+    { "type": "attack-pattern", "id": "attack-pattern--t1069-001", "name": "T1069.001: Permission Groups Discovery (Local)", "created": "2025-09-26T00:00:00Z", "modified": "2025-09-26T00:00:00Z",
+      "kill_chain_phases": [{ "kill_chain_name": "mitre-attack", "phase_name": "discovery" }],
+      "external_references": [{ "source_name": "mitre-attack", "external_id": "T1069.001" }] },
+
+    { "type": "attack-pattern", "id": "attack-pattern--t1057", "name": "T1057: Process Discovery", "created": "2025-09-26T00:00:00Z", "modified": "2025-09-26T00:00:00Z",
+      "kill_chain_phases": [{ "kill_chain_name": "mitre-attack", "phase_name": "discovery" }],
+      "external_references": [{ "source_name": "mitre-attack", "external_id": "T1057" }] },
+
+    { "type": "attack-pattern", "id": "attack-pattern--t1083", "name": "T1083: File and Directory Discovery", "created": "2025-09-26T00:00:00Z", "modified": "2025-09-26T00:00:00Z",
+      "kill_chain_phases": [{ "kill_chain_name": "mitre-attack", "phase_name": "discovery" }],
+      "external_references": [{ "source_name": "mitre-attack", "external_id": "T1083" }] },
+
+    { "type": "attack-pattern", "id": "attack-pattern--t1059-001", "name": "T1059.001: PowerShell", "created": "2025-09-26T00:00:00Z", "modified": "2025-09-26T00:00:00Z",
+      "kill_chain_phases": [{ "kill_chain_name": "mitre-attack", "phase_name": "execution" }],
+      "external_references": [{ "source_name": "mitre-attack", "external_id": "T1059.001" }] },
+
+    { "type": "attack-pattern", "id": "attack-pattern--t1047", "name": "T1047: Windows Management Instrumentation", "created": "2025-09-26T00:00:00Z", "modified": "2025-09-26T00:00:00Z",
+      "kill_chain_phases": [{ "kill_chain_name": "mitre-attack", "phase_name": "execution" }],
+      "external_references": [{ "source_name": "mitre-attack", "external_id": "T1047" }] },
+
+    { "type": "attack-pattern", "id": "attack-pattern--t1053-005", "name": "T1053.005: Scheduled Task", "created": "2025-09-26T00:00:00Z", "modified": "2025-09-26T00:00:00Z",
+      "kill_chain_phases": [{ "kill_chain_name": "mitre-attack", "phase_name": "persistence" }],
+      "external_references": [{ "source_name": "mitre-attack", "external_id": "T1053.005" }] },
+
+    { "type": "attack-pattern", "id": "attack-pattern--t1569-002", "name": "T1569.002: Service Execution", "created": "2025-09-26T00:00:00Z", "modified": "2025-09-26T00:00:00Z",
+      "kill_chain_phases": [{ "kill_chain_name": "mitre-attack", "phase_name": "execution" }],
+      "external_references": [{ "source_name": "mitre-attack", "external_id": "T1569.002" }] },
+
+    { "type": "attack-pattern", "id": "attack-pattern--t1547-001", "name": "T1547.001: Registry Run Keys/Startup Folder", "created": "2025-09-26T00:00:00Z", "modified": "2025-09-26T00:00:00Z",
+      "kill_chain_phases": [{ "kill_chain_name": "mitre-attack", "phase_name": "persistence" }],
+      "external_references": [{ "source_name": "mitre-attack", "external_id": "T1547.001" }] },
+
+    { "type": "attack-pattern", "id": "attack-pattern--t1112", "name": "T1112: Modify Registry", "created": "2025-09-26T00:00:00Z", "modified": "2025-09-26T00:00:00Z",
+      "kill_chain_phases": [{ "kill_chain_name": "mitre-attack", "phase_name": "defense-evasion" }],
+      "external_references": [{ "source_name": "mitre-attack", "external_id": "T1112" }] },
+
+    { "type": "attack-pattern", "id": "attack-pattern--t1218-005", "name": "T1218.005: Mshta", "created": "2025-09-26T00:00:00Z", "modified": "2025-09-26T00:00:00Z",
+      "kill_chain_phases": [{ "kill_chain_name": "mitre-attack", "phase_name": "defense-evasion" }],
+      "external_references": [{ "source_name": "mitre-attack", "external_id": "T1218.005" }] },
+
+    { "type": "attack-pattern", "id": "attack-pattern--t1218-011", "name": "T1218.011: Rundll32", "created": "2025-09-26T00:00:00Z", "modified": "2025-09-26T00:00:00Z",
+      "kill_chain_phases": [{ "kill_chain_name": "mitre-attack", "phase_name": "defense-evasion" }],
+      "external_references": [{ "source_name": "mitre-attack", "external_id": "T1218.011" }] },
+
+    { "type": "attack-pattern", "id": "attack-pattern--t1033", "name": "T1033: Account Discovery", "created": "2025-09-26T00:00:00Z", "modified": "2025-09-26T00:00:00Z",
+      "kill_chain_phases": [{ "kill_chain_name": "mitre-attack", "phase_name": "discovery" }],
+      "external_references": [{ "source_name": "mitre-attack", "external_id": "T1033" }] },
+
+    { "type": "attack-pattern", "id": "attack-pattern--t1036", "name": "T1036: Masquerading", "created": "2025-09-26T00:00:00Z", "modified": "2025-09-26T00:00:00Z",
+      "kill_chain_phases": [{ "kill_chain_name": "mitre-attack", "phase_name": "defense-evasion" }],
+      "external_references": [{ "source_name": "mitre-attack", "external_id": "T1036" }] },
+
+    { "type": "relationship", "id": "relationship--h3--t1059-004-1", "relationship_type": "uses", "source_ref": "campaign--linux-host3-0001", "target_ref": "attack-pattern--t1059-004", "start_time": "2025-09-26T12:42:19Z", "stop_time": "2025-09-26T12:42:23Z", "description": "T1059.004-1 ok. Hello + ping 8.8.8.8" },
+    { "type": "relationship", "id": "relationship--h3--t1059-004-6", "relationship_type": "uses", "source_ref": "campaign--linux-host3-0001", "target_ref": "attack-pattern--t1059-004", "start_time": "2025-09-26T12:42:23Z", "stop_time": "2025-09-26T12:42:23Z", "description": "T1059.004-6 ok. SHELL=/bin/bash" },
+    { "type": "relationship", "id": "relationship--h3--t1053-003-1", "relationship_type": "uses", "source_ref": "campaign--linux-host3-0001", "target_ref": "attack-pattern--t1053-003", "start_time": "2025-09-26T12:42:23Z", "stop_time": "2025-09-26T12:42:24Z", "description": "Cron replace; cleanup done." },
+    { "type": "relationship", "id": "relationship--h3--t1105-1", "relationship_type": "uses", "source_ref": "campaign--linux-host3-0001", "target_ref": "attack-pattern--t1105", "start_time": "2025-09-26T12:42:24Z", "stop_time": "2025-09-26T12:42:24Z", "description": "rsync push failed (DNS)." },
+    { "type": "relationship", "id": "relationship--h3--t1082-3", "relationship_type": "uses", "source_ref": "campaign--linux-host3-0001", "target_ref": "attack-pattern--t1082", "start_time": "2025-09-26T12:42:24Z", "stop_time": "2025-09-26T12:42:25Z", "description": "OS info (Ubuntu 22.04.5)." },
+    { "type": "relationship", "id": "relationship--h3--t1016-3", "relationship_type": "uses", "source_ref": "campaign--linux-host3-0001", "target_ref": "attack-pattern--t1016", "start_time": "2025-09-26T12:42:25Z", "stop_time": "2025-09-26T12:42:25Z", "description": "ip addr output; enp1s0=172.16.20.50/24." },
+    { "type": "relationship", "id": "relationship--h3--t1069-001-1", "relationship_type": "uses", "source_ref": "campaign--linux-host3-0001", "target_ref": "attack-pattern--t1069-001", "start_time": "2025-09-26T12:42:25Z", "stop_time": "2025-09-26T12:42:25Z", "description": "root group info." },
+    { "type": "relationship", "id": "relationship--h3--t1057-1", "relationship_type": "uses", "source_ref": "campaign--linux-host3-0001", "target_ref": "attack-pattern--t1057", "start_time": "2025-09-26T12:42:25Z", "stop_time": "2025-09-26T12:42:26Z", "description": "ps discovery." },
+    { "type": "relationship", "id": "relationship--h3--t1083-3", "relationship_type": "uses", "source_ref": "campaign--linux-host3-0001", "target_ref": "attack-pattern--t1083", "start_time": "2025-09-26T12:42:26Z", "stop_time": "2025-09-26T12:42:26Z", "description": "dir listing." },
+
+    { "type": "relationship", "id": "relationship--h4--t1059-001-1", "relationship_type": "uses", "source_ref": "campaign--windows-host4-0001", "target_ref": "attack-pattern--t1059-001", "start_time": "2025-09-26T12:57:19Z", "stop_time": "2025-09-26T12:57:22Z", "description": "error: Path empty." },
+    { "type": "relationship", "id": "relationship--h4--t1059-001-2", "relationship_type": "uses", "source_ref": "campaign--windows-host4-0001", "target_ref": "attack-pattern--t1059-001", "start_time": "2025-09-26T12:57:22Z", "stop_time": "2025-09-26T12:57:22Z", "description": "error: Path empty." },
+    { "type": "relationship", "id": "relationship--h4--t1047-1", "relationship_type": "uses", "source_ref": "campaign--windows-host4-0001", "target_ref": "attack-pattern--t1047", "start_time": "2025-09-26T12:57:22Z", "stop_time": "2025-09-26T12:57:22Z", "description": "error: Path empty." },
+    { "type": "relationship", "id": "relationship--h4--t1053-005-1", "relationship_type": "uses", "source_ref": "campaign--windows-host4-0001", "target_ref": "attack-pattern--t1053-005", "start_time": "2025-09-26T12:57:22Z", "stop_time": "2025-09-26T12:57:22Z", "description": "error: Path empty." },
+    { "type": "relationship", "id": "relationship--h4--t1569-002-1", "relationship_type": "uses", "source_ref": "campaign--windows-host4-0001", "target_ref": "attack-pattern--t1569-002", "start_time": "2025-09-26T12:57:22Z", "stop_time": "2025-09-26T12:57:22Z", "description": "error: Path empty." },
+    { "type": "relationship", "id": "relationship--h4--t1547-001-1", "relationship_type": "uses", "source_ref": "campaign--windows-host4-0001", "target_ref": "attack-pattern--t1547-001", "start_time": "2025-09-26T12:57:22Z", "stop_time": "2025-09-26T12:57:22Z", "description": "error: Path empty." },
+    { "type": "relationship", "id": "relationship--h4--t1112-1", "relationship_type": "uses", "source_ref": "campaign--windows-host4-0001", "target_ref": "attack-pattern--t1112", "start_time": "2025-09-26T12:57:22Z", "stop_time": "2025-09-26T12:57:22Z", "description": "error: Path empty." },
+    { "type": "relationship", "id": "relationship--h4--t1218-005-1", "relationship_type": "uses", "source_ref": "campaign--windows-host4-0001", "target_ref": "attack-pattern--t1218-005", "start_time": "2025-09-26T12:57:22Z", "stop_time": "2025-09-26T12:57:22Z", "description": "error: Path empty." },
+    { "type": "relationship", "id": "relationship--h4--t1218-011-1", "relationship_type": "uses", "source_ref": "campaign--windows-host4-0001", "target_ref": "attack-pattern--t1218-011", "start_time": "2025-09-26T12:57:22Z", "stop_time": "2025-09-26T12:57:22Z", "description": "error: Path empty." },
+    { "type": "relationship", "id": "relationship--h4--t1105-1", "relationship_type": "uses", "source_ref": "campaign--windows-host4-0001", "target_ref": "attack-pattern--t1105", "start_time": "2025-09-26T12:57:22Z", "stop_time": "2025-09-26T12:57:22Z", "description": "error: Path empty." },
+    { "type": "relationship", "id": "relationship--h4--t1082-1", "relationship_type": "uses", "source_ref": "campaign--windows-host4-0001", "target_ref": "attack-pattern--t1082", "start_time": "2025-09-26T12:57:22Z", "stop_time": "2025-09-26T12:57:22Z", "description": "error: Path empty." },
+    { "type": "relationship", "id": "relationship--h4--t1033-1", "relationship_type": "uses", "source_ref": "campaign--windows-host4-0001", "target_ref": "attack-pattern--t1033", "start_time": "2025-09-26T12:57:22Z", "stop_time": "2025-09-26T12:57:23Z", "description": "error: Path empty." },
+    { "type": "relationship", "id": "relationship--h4--t1016-1", "relationship_type": "uses", "source_ref": "campaign--windows-host4-0001", "target_ref": "attack-pattern--t1016", "start_time": "2025-09-26T12:57:23Z", "stop_time": "2025-09-26T12:57:23Z", "description": "error: Path empty." },
+    { "type": "relationship", "id": "relationship--h4--t1036-1", "relationship_type": "uses", "source_ref": "campaign--windows-host4-0001", "target_ref": "attack-pattern--t1036", "start_time": "2025-09-26T12:57:23Z", "stop_time": "2025-09-26T12:57:23Z", "description": "error: Path empty." },
+
     {
       "type": "report",
       "id": "report--atomic-lab-0002",
       "name": "Atomic Runs — Host3 (Linux) & Host4 (Windows)",
       "published": "2025-09-26T00:00:00Z",
+      "modified": "2025-09-26T00:00:00Z",
       "labels": ["atom-playbook","intrusion-set"],
       "object_refs": [
         "intrusion-set--atomic-sim-0002",
