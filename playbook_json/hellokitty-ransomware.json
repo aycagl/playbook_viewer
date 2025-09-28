@@ -68,7 +68,6 @@
     { "type": "campaign", "id": "campaign--c3c1c5d3-6f3b-4a9e-a111-0000000000h3", "name": "Linux Run — Host 3",   "created": "2025-09-26T00:00:00Z", "modified": "2025-09-26T00:00:00Z" },
     { "type": "campaign", "id": "campaign--c3c1c5d3-6f3b-4a9e-a111-0000000000h4", "name": "Windows Run — Host 4", "created": "2025-09-26T00:00:00Z", "modified": "2025-09-26T00:00:00Z" },
 
-    /* === Techniques (sütun yerleşimi için kill_chain_phases gerekli) === */
     { "type":"attack-pattern","id":"attack-pattern--t1059-004","name":"T1059.004: Bash",
       "kill_chain_phases":[{"kill_chain_name":"mitre-attack","phase_name":"execution"}] },
 
@@ -123,7 +122,6 @@
     { "type":"attack-pattern","id":"attack-pattern--t1036","name":"T1036: Masquerading",
       "kill_chain_phases":[{"kill_chain_name":"mitre-attack","phase_name":"defense-evasion"}] },
 
-    /* === Host3 (Linux) ilişkileri === */
     { "type":"relationship","id":"relationship--h3--t1059-004-1","relationship_type":"uses",
       "source_ref":"campaign--c3c1c5d3-6f3b-4a9e-a111-0000000000h3","target_ref":"attack-pattern--t1059-004",
       "start_time":"2025-09-26T12:42:19Z","stop_time":"2025-09-26T12:42:23Z",
@@ -169,7 +167,6 @@
       "start_time":"2025-09-26T12:42:26Z","stop_time":"2025-09-26T12:42:26Z",
       "description":"dosya/dizin listeleme (art.sh, atomic.sh vb.)." },
 
-    /* === Host4 (Windows) ilişkileri === */
     { "type":"relationship","id":"relationship--h4--t1059-001-1","relationship_type":"uses",
       "source_ref":"campaign--c3c1c5d3-6f3b-4a9e-a111-0000000000h4","target_ref":"attack-pattern--t1059-001",
       "start_time":"2025-09-26T12:57:19Z","stop_time":"2025-09-26T12:57:22Z",
